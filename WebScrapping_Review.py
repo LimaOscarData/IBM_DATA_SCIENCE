@@ -94,7 +94,7 @@ table_bs = BeautifulSoup(table, "html.parser")
 
 # find All#################################
 table_rows=table_bs.find_all('tr')
-# print(table_rows)
+# print(table_rows) #this is a list
 # [<tr><td id="flight">Flight No</td><td>Launch site</td> <td>Payload mass</td></tr>,
 # <tr> <td>1</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a></a></a></td><td>300 kg</td></tr>,
 # <tr><td>2</td><td><a href="https://en.wikipedia.org/wiki/Texas">Texas</a></td><td>94 kg</td></tr>,
@@ -119,4 +119,16 @@ first_row =table_rows[0]
 # row 2 is <tr><td>2</td><td><a href="https://en.wikipedia.org/wiki/Texas">Texas</a></td><td>94 kg</td></tr>
 # row 3 is <tr><td>3</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a> </a></a></td><td>80 kg</td></tr>
 
-aaaaa
+# print(table_rows)
+# [<tr><td id="flight">Flight No</td><td>Launch site</td>
+# <td>Payload mass</td></tr>, <tr>
+# <td>1</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a></a></a></td><td>300 kg</td></tr>,
+# <tr><td>2</td><td><a href="https://en.wikipedia.org/wiki/Texas">Texas</a></td><td>94 kg</td></tr>,
+# <tr><td>3</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a> </a></a></td><td>80 kg</td></tr>]
+
+
+for i,row in enumerate(table_rows):
+    print("row",i)
+    cells=row.find_all('td')
+    for j,cell in enumerate(cells):
+        print('colunm',j,"cell",cell)
