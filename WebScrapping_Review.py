@@ -1,6 +1,11 @@
 from bs4 import BeautifulSoup # this module helps in web scrapping.
 import requests  # this module helps us to download a web page
-html="<!DOCTYPE html><html><head><title>Page Title</title></head><body><h3><b id='boldest'>Lebron James</b></h3><p> Salary: $ 92,000,000 </p><h3> Stephen Curry</h3><p> Salary: $85,000, 000 </p><h3> Kevin Durant </h3><p> Salary: $73,200, 000</p></body></html>"
+html="<!DOCTYPE " \
+     "html><html><head><title>Page Title</title></head><body><h3><b id='boldest'>Lebron James</b>" \
+     "</h3><p> Salary: $ 92,000,000 </p>" \
+     "<h3> Stephen Curry</h3><p> Salary: $85,000, 000 </p>" \
+     "<h3> Kevin Durant </h3><p> Salary: $73,200, 000</p>" \
+     "</body></html>"
 soup=BeautifulSoup(html, "html.parser")
 # print(soup)
 
@@ -120,15 +125,14 @@ first_row =table_rows[0]
 # row 3 is <tr><td>3</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a> </a></a></td><td>80 kg</td></tr>
 
 # print(table_rows)
-# [<tr><td id="flight">Flight No</td><td>Launch site</td>
-# <td>Payload mass</td></tr>, <tr>
-# <td>1</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a></a></a></td><td>300 kg</td></tr>,
+# [<tr><td id="flight">Flight No</td><td>Launch site</td><td>Payload mass</td></tr>,
+# <tr><td>1</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a></a></a></td><td>300 kg</td></tr>,
 # <tr><td>2</td><td><a href="https://en.wikipedia.org/wiki/Texas">Texas</a></td><td>94 kg</td></tr>,
 # <tr><td>3</td><td><a href="https://en.wikipedia.org/wiki/Florida">Florida<a> </a></a></td><td>80 kg</td></tr>]
 
 
-for i,row in enumerate(table_rows):
-    print("row",i)
-    cells=row.find_all('td')
-    for j,cell in enumerate(cells):
-        print('colunm',j,"cell",cell)
+# for i,row in enumerate(table_rows):
+#     print("row",i)
+#     cells=row.find_all('td')
+#     for j,cell in enumerate(cells):
+#         print('colunm',j,"cell",cell)
