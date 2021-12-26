@@ -218,10 +218,23 @@ two_tables_bs= BeautifulSoup(two_tables, 'html.parser')
 
 # We can filter on the class attribute to find the second table,
 # but because class is a keyword in Python, we add an underscore.
-print(two_tables_bs.find("table",class_='pizza'))
+# print(two_tables_bs.find("table",class_='pizza'))
 # <table class="pizza">
 # <tr><td>Pizza Place</td><td>Orders</td> <td>Slices </td></tr>
 # <tr><td>Domino's Pizza</td><td>10</td><td>100</td></tr>
 # <tr><td>Little Caesars</td><td>12</td><td>144 </td></tr>
 # <tr><td>Papa John's </td><td>15 </td><td>165</td></tr>
 # </table>
+
+################################# Downloading And Scraping The Contents Of A Web Page #################################
+# We Download the contents of the web page:
+url = "http://www.ibm.com"
+
+# We use get to download the contents of the webpage in text format and store in a variable called data:
+data  = requests.get(url).text
+# We create a BeautifulSoup object using the BeautifulSoup constructor
+soup = BeautifulSoup(data,"html.parser")  # create a soup object using the variable 'data'
+# Scrape all links
+for link in soup.find_all('a',href=True):  # in html anchor/link is represented by the tag <a>
+    print(link.get('href'))
+
