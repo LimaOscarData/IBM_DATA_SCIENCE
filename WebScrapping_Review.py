@@ -309,7 +309,7 @@ for row in tables[table_index].tbody.find_all("tr"):
         population_data = population_data.append({"Rank":rank, "Country":country, "Population":population,
                                                   "Area":area, "Density":density}, ignore_index=True)
 
-print(population_data)
+# print(population_data)
 #   Rank           Country   Population     Area Density
 # 0    1         Singapore    5,704,000      710   8,033
 # 1    2        Bangladesh  171,930,000  143,998   1,194
@@ -322,3 +322,71 @@ print(population_data)
 # 8    9       Netherlands   17,670,000   41,526     426
 # 9   10            Israel    9,450,000   22,072     428
 
+############# Scrape data from HTML tables into a DataFrame using BeautifulSoup and read_html ###############
+# Using the same url, data, soup, and tables object as in the last section we can use the read_html
+# function to create a DataFrame.
+# Remember the table we need is located in tables[table_index]
+# We can now use the pandas function read_html and give it the string version of the table as well as
+# the flavor which is the parsing engine bs4.
+# print(pd.read_html(str(tables[5]), flavor='bs4'))
+# [   Rank      Country  Population  Area(km2)  Density(pop/km2)
+# 0     1    Singapore     5704000        710              8033
+# 1     2   Bangladesh   171930000     143998              1194
+# 2     3    Palestine     5266785       6020               847
+# 3     4      Lebanon     6856000      10452               656
+# 4     5       Taiwan    23604000      36193               652
+# 5     6  South Korea    51781000      99538               520
+# 6     7       Rwanda    12374000      26338               470
+# 7     8        Haiti    11578000      27065               428
+# 8     9  Netherlands    17670000      41526               426
+# 9    10       Israel     9450000      22072               428]
+
+# The function read_html always returns a list of DataFrames so we must pick the one we want out of the list.
+population_data_read_html = pd.read_html(str(tables[5]), flavor='bs4')[0] # if you put [0] there wont be any brackets
+# print(population_data_read_html)
+#    Rank      Country  Population  Area(km2)  Density(pop/km2)
+# 0     1    Singapore     5704000        710              8033
+# 1     2   Bangladesh   171930000     143998              1194
+# 2     3    Palestine     5266785       6020               847
+# 3     4      Lebanon     6856000      10452               656
+# 4     5       Taiwan    23604000      36193               652
+# 5     6  South Korea    51781000      99538               520
+# 6     7       Rwanda    12374000      26338               470
+# 7     8        Haiti    11578000      27065               428
+# 8     9  Netherlands    17670000      41526               426
+# 9    10       Israel     9450000      22072               428
+
+############# Scrape data from HTML tables into a DataFrame using read_html ###############
+# We can also use the read_html function to directly get DataFrames from a url.
+dataframe_list = pd.read_html(url, flavor='bs4')
+# We can see there are 25 DataFrames just like when we used find_all on the soup object.
+# print(len(dataframe_list))
+
+# Finally we can pick the DataFrame we need out of the list.
+# print(dataframe_list[5])
+#    Rank      Country  Population  Area(km2)  Density(pop/km2)
+# 0     1    Singapore     5704000        710              8033
+# 1     2   Bangladesh   171930000     143998              1194
+# 2     3    Palestine     5266785       6020               847
+# 3     4      Lebanon     6856000      10452               656
+# 4     5       Taiwan    23604000      36193               652
+# 5     6  South Korea    51781000      99538               520
+# 6     7       Rwanda    12374000      26338               470
+# 7     8        Haiti    11578000      27065               428
+# 8     9  Netherlands    17670000      41526               426
+# 9    10       Israel     9450000      22072               428
+
+# We can also use the match parameter to select the specific table we want.
+# If the table contains a string matching the text it will be read.
+# print(pd.read_html(url, match="10 most densely populated countries", flavor='bs4')[0])
+#    Rank      Country  Population  Area(km2)  Density(pop/km2)
+# 0     1    Singapore     5704000        710              8033
+# 1     2   Bangladesh   171930000     143998              1194
+# 2     3    Palestine     5266785       6020               847
+# 3     4      Lebanon     6856000      10452               656
+# 4     5       Taiwan    23604000      36193               652
+# 5     6  South Korea    51781000      99538               520
+# 6     7       Rwanda    12374000      26338               470
+# 7     8        Haiti    11578000      27065               428
+# 8     9  Netherlands    17670000      41526               426
+# 9    10       Israel     9450000      22072               428
